@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "server": "source ./.env && node ./server.js"
+    "server": "node ./server.js"
   },
   "author": "Paul Rock <paul@drteam.rocks>",
   "license": "MIT",
