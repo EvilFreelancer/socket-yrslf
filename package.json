@@ -1,7 +1,7 @@
 {
   "name": "socket-yrslf",
   "version": "1.0.0",
-  "description": "",
+  "description": "Bot for Twitch <-> Discord chats messaging",
   "scripts": {
     "server": "node ./server.js"
   },
