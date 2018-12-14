@@ -7,7 +7,8 @@ const {
   TWITCH_KING = "",
   DISCORD_CHANNEL_ID = "",
   DISCORD_TOKEN = "",
-  DISCORD_USER_ID = ""
+  DISCORD_USER_ID = "",
+  DISCORD_HOOK_URL = ""
 } = process.env;
 
 export const twitchConfig = {
@@ -20,7 +21,8 @@ export const twitchConfig = {
 export const discordConfig = {
   channelId: DISCORD_CHANNEL_ID,
   token: DISCORD_TOKEN,
-  userId: DISCORD_USER_ID
+  userId: DISCORD_USER_ID,
+  hookUrl: DISCORD_HOOK_URL
 };
 
 export const twitchClientConfig = {

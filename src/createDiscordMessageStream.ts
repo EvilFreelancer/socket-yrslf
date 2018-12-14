@@ -15,7 +15,8 @@ export const createDiscordMessageStream = (
     filter(
       ({ channel, author }) =>
         channel.id == discordConfig.channelId &&
-        author.id != discordConfig.userId
+        author.id != discordConfig.userId &&
+        !author.bot
     ),
     map(({ author, content }) => {
       const prefix =
