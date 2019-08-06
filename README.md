@@ -16,12 +16,16 @@ And if settings is correct you will see messages in chats after server started.
 |DISCORD_TOKEN      |xxxx          |
 |DISCORD_CHANNEL_ID |1234          |
 |DISCORD_USER_ID    |123456        |
+|DISCORD_HOOK_URL   |hook_url      |
 |TWITCH_USERNAME    |MyBot         |
 |TWITCH_CHANNEL     |#mychannel    |
 |TWITCH_TOKEN       |oauth:xxxxxxx |
 |TWITCH_KING        |TheKing       |
 
-### How to obtain Twitch tokens, ids, etc
+<details>
+<summary>
+  <i>How to obtain tokens, IDs, etc</i>
+</summary>
 
 #### TWITCH_TOKEN
 
@@ -41,8 +45,6 @@ Name of your Bot user, should be the same as you used for authorization on Twitc
 #### TWITCH_KING
 
 Username of account in Discord (for example your account), which you want to highlight.
-
-### How to obtain Discord tokens, ids, etc
 
 #### DISCORD_USER_ID
 
@@ -66,6 +68,12 @@ will be a "Developer Mode", you need switch this to ON.
 Then close the settings page and click MRB on any text chat room what you
 want, then select "Copy ID" from list and ID and `DISCORD_CHANNEL_ID``
 will saved to your clipboard. 
+
+#### DISCORD_HOOK_URL
+
+URL of Discord webhook, can be found on Webhooks tab of Discord server settings. 
+
+</details>
 
 ## How to use via NPM
 
