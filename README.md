@@ -20,7 +20,6 @@ And if settings is correct you will see messages in chats after server started.
 |TWITCH_USERNAME    |MyBot         |
 |TWITCH_CHANNEL     |#mychannel    |
 |TWITCH_TOKEN       |oauth:xxxxxxx |
-|TWITCH_KING        |TheKing       |
 
 <details>
 <summary>
@@ -41,10 +40,6 @@ path `evilfreelancer` is channel name.
 #### TWITCH_USERNAME
 
 Name of your Bot user, should be the same as you used for authorization on Twitch.
-
-#### TWITCH_KING
-
-Username of account in Discord (for example your account), which you want to highlight.
 
 #### DISCORD_USER_ID
 
