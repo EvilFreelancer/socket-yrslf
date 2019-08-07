@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Bot for Twitch <-> Discord chats messaging",
   "scripts": {
+    "prod": "npm run production",
     "production": "tsc -p ./",
     "watch": "tsc -w -p ./",
     "debug": "nodemon --watch ./dist --inspect=0.0.0.0:9222 --nolazy ./dist/index.js",
@@ -12,14 +13,18 @@
   "author": "Paul Rock <paul@drteam.rocks>",
   "license": "MIT",
   "dependencies": {
-    "@types/node": "^10.12.14",
+    "@types/node": "^10.14.15",
     "@types/request": "^2.48.1",
     "@types/typescript": "^2.0.0",
     "discord.js": "^11.4.2",
     "dotenv": "^6.2.0",
     "request": "^2.88.0",
     "rxjs": "^6.3.3",
-    "tmi.js": "^1.2.1",
-    "typescript": "^3.2.2"
+    "tmi.js": "^1.4.5",
+    "typescript": "^3.2.2",
+    "yt-livechat": "^2.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
   }
 }
