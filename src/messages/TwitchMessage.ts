@@ -1,4 +1,4 @@
-export interface ITwitchMessage {
+export interface TwitchMessage {
   channel: string;
   userState: {
     "display-name": string;

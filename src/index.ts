@@ -1,45 +1,68 @@
+// Main libraries
 import Discord from "discord.js";
 import Twitch from "tmi.js";
+
+// Additional libraries
 import request from "request";
-import { forkJoin } from "rxjs";
-import { map, throwIfEmpty } from "rxjs/operators";
-import { twitchClientConfig, twitchConfig, discordConfig } from "./config";
-import { createDiscordMessageStream } from "./createDiscordMessageStream";
-import { createTitchMessageStream } from "./createTitchMessageStream";
+import {forkJoin} from "rxjs";
+import {map, throwIfEmpty} from "rxjs/operators";
 
+// Read configs and other important stuff
+import {twitchClientConfig, twitchConfig, discordConfig} from "./config";
+import {discordStream} from "./streams/DiscordStream";
+import {twitchStream} from "./streams/TwitchStream";
+
+// Start clients
 const discord = new Discord.Client();
-const twitch = new Twitch.client(twitchClientConfig);
+const twitch  = new Twitch.Client(twitchClientConfig);
 
-const discordMsg$ = createDiscordMessageStream(
-  discord,
-  discordConfig,
-  twitchConfig
-);
-const twitchMsg$ = createTitchMessageStream(twitch);
+// Stream logic of clients
+const discordMsg$ = discordStream(discord);
+const twitchMsg$  = twitchStream(twitch);
 
-forkJoin(twitch.connect(), discord.login(discordConfig.token))
+forkJoin(
+  twitch.connect(),
+  discord.login(discordConfig.token)
+)
   .pipe(
-    map(
-      () => discord.channels.get(discordConfig.channelId) as Discord.TextChannel
-    ),
+    map(() => discord.channels.get(discordConfig.channelId) as Discord.TextChannel),
     throwIfEmpty(() => new Error("Channel not found"))
   )
-  .subscribe(channel => {
-    console.log("Connected");
+  .subscribe(discordChannel => {
+    console.log(`Connected to Discord channel ${discordChannel.id}`);
 
-    twitchMsg$.subscribe(({ message, username, avatar }) => {
-      console.log(message);
+    // Messages from YouTube should be sent to Discord and Twitch
+
+    // Messages from Twitch should be sent to Discord and YouTube
+    twitchMsg$.subscribe(({message, username, avatar}) => {
+      console.log(`[Twitch] ${username}: ${message}`);
+
+      // Message to Discord
       request({
         url: discordConfig.hookUrl,
         method: "POST",
         json: {
           content: message,
-          username: `${username} twitch`,
+          username: `[Twitch] ${username}`,
           avatar_url: avatar
         }
       });
 
-      // channel.send(message);
+      // Message to YouTube
+      //youtube.send(`[Twitch] ${username}: ${message}`);
+
     });
-    discordMsg$.subscribe(message => twitch.say(twitchConfig.channel, message));
+
+    // Messages from Discord should be sent to Twitch and YouTube
+    discordMsg$.subscribe(message => {
+      console.log(message);
+
+      // Message to Twitch
+      twitch.say(twitchConfig.channel, message);
+
+      // Message to YouTube
+      //youtube.send(message);
+
+    });
+
   });
