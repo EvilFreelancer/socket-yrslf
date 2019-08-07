@@ -4,11 +4,6 @@ WORKDIR /app
 RUN npm install --prod \
  && npm run production
 
-FROM node:alpine
-COPY . /app
-COPY --from=builder /app/dist/ /app/dist
-WORKDIR /app
-
 ENV TWITCH_USERNAME=SocketYrslf
 ENV TWITCH_CHANNEL=#mychannel
 ENV TWITCH_TOKEN=oauth:xxxxxxx
