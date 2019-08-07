@@ -3,15 +3,16 @@
   "version": "1.0.0",
   "description": "Bot for Twitch <-> Discord chats messaging",
   "scripts": {
-    "postinstall": "tsc -p ./",
+    "production": "tsc -p ./",
     "watch": "tsc -w -p ./",
     "debug": "nodemon --watch ./dist --inspect=0.0.0.0:9222 --nolazy ./dist/index.js",
     "start": "node ./dist/index.js",
-    "server": "npm start"
+    "serve": "npm start"
   },
   "author": "Paul Rock <paul@drteam.rocks>",
   "license": "MIT",
   "dependencies": {
+    "@types/node": "^10.12.14",
     "@types/request": "^2.48.1",
     "@types/typescript": "^2.0.0",
     "discord.js": "^11.4.2",
@@ -20,8 +21,5 @@
     "rxjs": "^6.3.3",
     "tmi.js": "^1.2.1",
     "typescript": "^3.2.2"
-  },
-  "devDependencies": {
-    "@types/node": "^10.12.14"
   }
 }
