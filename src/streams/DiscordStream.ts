@@ -8,8 +8,9 @@ const discordMsg$ = new Subject<Discord.Message>();
  * Return stream with messages from Twitch
  *
  * @param discord
+ * @param discordConfig
  */
-export const discordStream = (discord) => {
+export const discordStream = (discord, discordConfig) => {
 
   // On each chat message from Discord
   discord.on('message', message => {
@@ -18,7 +19,7 @@ export const discordStream = (discord) => {
 
   // Return stream with messages from Discord
   return discordMsg$.pipe(
-    filter(({author}) => !author.bot),
+    filter(({author, channel}) => !author.bot && author.id !== discordConfig.userId && channel.id === discordConfig.channelId),
     map(({author, content}) => {
       return `[Discord] ${author.username}: ${content}`;
     })

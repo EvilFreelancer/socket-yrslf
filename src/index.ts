@@ -1,6 +1,7 @@
 // Main libraries
 import Discord from "discord.js";
 import Twitch from "tmi.js";
+import Youtube from 'ymi.js';
 
 // Additional libraries
 import request from "request";
@@ -8,20 +9,23 @@ import {forkJoin} from "rxjs";
 import {map, throwIfEmpty} from "rxjs/operators";
 
 // Read configs and other important stuff
-import {twitchClientConfig, twitchConfig, discordConfig} from "./config";
+import {twitchClientConfig, twitchConfig, discordConfig, youtubeConfig} from "./config";
 import {discordStream} from "./streams/DiscordStream";
 import {twitchStream} from "./streams/TwitchStream";
+import {youtubeStream} from "./streams/YoutubeStream";
 
 // Start clients
 const discord = new Discord.Client();
 const twitch  = new Twitch.Client(twitchClientConfig);
+const youtube = new Youtube.client(youtubeConfig);
 
 // Stream logic of clients
-const discordMsg$ = discordStream(discord);
+const discordMsg$ = discordStream(discord, discordConfig);
 const twitchMsg$  = twitchStream(twitch);
 
 forkJoin(
   twitch.connect(),
+  // youtube.connect(),
   discord.login(discordConfig.token)
 )
   .pipe(
@@ -39,11 +43,11 @@ forkJoin(
 
       // Message to Discord
       request({
-        url: discordConfig.hookUrl,
+        url:    discordConfig.hookUrl,
         method: "POST",
-        json: {
-          content: message,
-          username: `[Twitch] ${username}`,
+        json:   {
+          content:    message,
+          username:   '[Twitch] ' + username,
           avatar_url: avatar
         }
       });
@@ -54,7 +58,7 @@ forkJoin(
     });
 
     // Messages from Discord should be sent to Twitch and YouTube
-    discordMsg$.subscribe(message => {
+    discordMsg$.subscribe((message) => {
       console.log(message);
 
       // Message to Twitch
