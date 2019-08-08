@@ -1,4 +1,4 @@
-import Youtube from 'ymi.js';
+import Youtube from 'youtube-chill';
 import {Subject} from "rxjs";
 import {map, filter} from "rxjs/operators";
 import {YoutubeMessage} from "../messages/YoutubeMessage";

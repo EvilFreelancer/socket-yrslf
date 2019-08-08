@@ -1,36 +1,32 @@
 require("dotenv").config();
+const {env} = process;
 
 /**
  * Discord settings
  */
 export const discordConfig = {
-  channelId: process.env.DISCORD_CHANNEL_ID || "",
-  token:     process.env.DISCORD_TOKEN || "",
-  userId:    process.env.DISCORD_USER_ID || "",
-  hookUrl:   process.env.DISCORD_HOOK_URL || "",
+  channelId: env.DISCORD_CHANNEL_ID || "",
+  token:     env.DISCORD_TOKEN || "",
+  userId:    env.DISCORD_USER_ID || "",
+  hookUrl:   env.DISCORD_HOOK_URL || "",
 };
 
 /**
  * YouTube settings
  */
 export const youtubeConfig = {
-  oauth:        {
-    client_id:     process.env.YOUTUBE_CLIENT_ID || "",
-    client_secret: process.env.YOUTUBE_CLIENT_SECRET || "",
-    access_token:  process.env.YOUTUBE_ACCESS_TOKEN || "",
-    refresh_token: process.env.YOUTUBE_REFRESH_TOKEN || "",
-  },
-  live_chat_id: process.env.YOUTUBE_LIVECHAT_ID || "",
-  page_token:   null,
+  APIKey:    env.YOUTUBE_API_KEY || "",
+  ChannelID: env.YOUTUBE_CHANNEL_ID || "",
+  Delay: Number(env.YOUTUBE_CHANNEL_ID)|| 5000,
 };
 
 /**
  * Twitch settings
  */
 export const twitchConfig = {
-  username: process.env.TWITCH_USERNAME || "",
-  token:    process.env.TWITCH_TOKEN || "",
-  channel:  process.env.TWITCH_CHANNEL || "",
+  username: env.TWITCH_USERNAME || "",
+  token:    env.TWITCH_TOKEN || "",
+  channel:  env.TWITCH_CHANNEL || "",
 };
 
 export const twitchClientConfig = {
